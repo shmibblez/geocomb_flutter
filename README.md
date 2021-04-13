@@ -10,7 +10,11 @@ not done yet, but wrote lots of stuff & don't want to risk losing it
 - this package won't be federated for now, but could be in the future since switch shouldn't be too complicated
 
 # project status (where left off)
-- need to start from 0, nothing new here -- Actually, everything will be new.
+- dart js package not working, probably using it wrong? Need to comment out that code & try using dart:js -> better documentation, can see if doing something wrong more easily.
+- to make things absolutely clear, need to:
+  - comment out code in web_interop.dart
+  - import 'dart:js' into geocomb_flutter.dart
+  - replace all classes from web_interop (ones prefixed with D_) with JsObject, & get variables & call functions directly on those
 
 <del>
 

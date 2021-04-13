@@ -1,4 +1,4 @@
-@JS("geocomb-web")
+@JS("GEOCOMBWEB")
 library gw;
 
 import 'package:js/js.dart';
@@ -6,6 +6,8 @@ import 'dart:async';
 
 import 'package:geocomb_flutter/geocomb_flutter.dart'
     show MapOrientation, RotationMethod;
+
+// "Icosahedron.onReady() not ready yet, currently only available on web"));
 
 @JS("Icosahedron")
 class D_Icosahedron {
