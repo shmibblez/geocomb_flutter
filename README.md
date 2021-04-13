@@ -1,6 +1,8 @@
 # geocomb_flutter
 geocomb implementation but in flutter, this time it's personal
 
+not done yet, but wrote lots of stuff & don't want to risk losing it
+
 ## project structure
 - android & ios will use dart::ffi with geocomb-c, and web will use node package geocomb-web which relies on WebAssembly
 - this means, other than some files, no need for method channels, which should mean speed

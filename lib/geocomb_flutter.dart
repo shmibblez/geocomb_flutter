@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:geocomb_flutter/web_interop.dart';
 
 class MapOrientation {
@@ -12,6 +13,13 @@ class RotationMethod {
 }
 
 class Icosahedron {
+  static const MethodChannel _channel = const MethodChannel('geocomb_flutter');
+
+  static Future<String> get platformVersion async {
+    final String version = await _channel.invokeMethod('getPlatformVersion');
+    return version;
+  }
+
   Icosahedron(String mo, String rm)
       : assert(Icosahedron.isReady),
         this._ico = new D_Icosahedron(mo, rm);
@@ -157,7 +165,7 @@ class HashProperties {
 //   }
 // }
 
-// // old code
+// // older old code
 
 // import 'dart:async';
 
@@ -170,12 +178,12 @@ class HashProperties {
 //   final MapOrientation mo;
 //   final RotationMethod rm;
 
-//   static const MethodChannel _channel = const MethodChannel('geocomb_flutter');
+// static const MethodChannel _channel = const MethodChannel('geocomb_flutter');
 
-//   static Future<String> get platformVersion async {
-//     final String version = await _channel.invokeMethod('getPlatformVersion');
-//     return version;
-//   }
+// static Future<String> get platformVersion async {
+//   final String version = await _channel.invokeMethod('getPlatformVersion');
+//   return version;
+// }
 
 //   /// returns whether plugin is ready
 //   ///
