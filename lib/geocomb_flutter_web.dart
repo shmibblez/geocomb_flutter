@@ -7,6 +7,7 @@ import 'dart:html' as html show window;
 
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:import_js_library/import_js_library.dart';
 
 /// A web implementation of the GeocombFlutter plugin.
 class GeocombFlutterWeb {
@@ -16,6 +17,9 @@ class GeocombFlutterWeb {
       const StandardMethodCodec(),
       registrar,
     );
+
+    importJsLibrary(
+        url: "web/geocomb_bundle.js", flutterPluginName: "geocomb_flutter");
 
     final pluginInstance = GeocombFlutterWeb();
     channel.setMethodCallHandler(pluginInstance.handleMethodCall);

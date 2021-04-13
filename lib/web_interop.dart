@@ -2,7 +2,6 @@
 library gw;
 
 import 'package:js/js.dart';
-import 'dart:async';
 
 import 'package:geocomb_flutter/geocomb_flutter.dart'
     show MapOrientation, RotationMethod;
@@ -20,7 +19,7 @@ class D_Icosahedron {
       [String mo = MapOrientation.ECEF, String rm = RotationMethod.gnomonic]);
 
   /// onReady constructor, returns Icosahedron when WebAssembly runtime ready
-  external static Future<D_Icosahedron> onReady(
+  external static onReady(
       [String mo = MapOrientation.ECEF, String rm = RotationMethod.gnomonic]);
 
   external D_Point3 pointFromCoords(double lat, double lon);

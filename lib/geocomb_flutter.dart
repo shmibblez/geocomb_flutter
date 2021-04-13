@@ -1,4 +1,4 @@
-import 'dart:js';
+import 'dart:js_util';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -38,19 +38,8 @@ class Icosahedron {
     debugPrint("--Icosahedron.onReady called");
     if (kIsWeb) {
       debugPrint("---calling D_Icosahedron.onReady");
-      debugPrint("---D_Icosahedron: $D_Icosahedron");
-      debugPrint("D_Icosahedron.onReady: ${D_Icosahedron.onReady}");
-      final D_Icosahedron ico = await D_Icosahedron.onReady(mo, rm);
-
-      await Future.delayed(Duration(seconds: 3));
-
-      debugPrint(
-          "ico runtime typeafter 3 secs: ${ico.runtimeType}, tostring: ${ico.toString}");
-      debugPrint("ico.pointFromCoords: ${ico.pointFromCoords}");
-
-      debugPrint(
-          "ico runtime type: ${ico.runtimeType}, tostring: ${ico.toString}");
-      debugPrint("ico.pointFromCoords: ${ico.pointFromCoords}");
+      final D_Icosahedron ico =
+          await promiseToFuture(D_Icosahedron.onReady(mo, rm));
       debugPrint("---called D_Icosahedron.onReady, now returning obj");
       return new Icosahedron._fromD_Ico(ico);
     } else {
@@ -143,3 +132,99 @@ class HashProperties {
   int get col => this._hp.col;
   int get res => this._hp.res;
 }
+
+//
+//
+//
+/// Icosahedron changes
+///
+// class Icosahedron {
+//   static const MethodChannel _channel = const MethodChannel('geocomb_flutter');
+
+//   static Future<String> get platformVersion async {
+//     final String version = await _channel.invokeMethod('getPlatformVersion');
+//     return version;
+//   }
+
+//   static final _gw = context["GEOCOMBWEB"];
+
+//   Icosahedron(String mo, String rm)
+//       : assert(Icosahedron.isReady),
+//         this._ico = JsObject(_gw["Icosahedron"], [mo, rm]);
+
+//   Icosahedron._fromJsObj(JsObject ico) : this._ico = ico;
+
+//   final JsObject _ico;
+
+//   String get mo => this._ico["mo"];
+//   String get rm => this._ico["rm"];
+//   static bool get isReady => _gw["Icosahedron"]["isReady"];
+
+//   static Future<Icosahedron> onReady(String mo, String rm) async {
+//     debugPrint("--Icosahedron.onReady called");
+//     if (kIsWeb) {
+//       debugPrint("----Icosahedron properties from JsObject");
+
+//       debugPrint("GEOCOMBWEB: ${context["GEOCOMBWEB"]}");
+//       debugPrint("Icosahedron: ${context["GEOCOMBWEB"]["Icosahedron"]}");
+//       // debugPrint(
+//       //     "Icosahedron.onReady: ${context["GEOCOMBWEB"]["Icosahedron"]["onReady"]}");
+
+//       debugPrint("----Icosahedron properties from JsObject");
+
+//       // debugPrint("---calling D_Icosahedron.onReady");
+//       // debugPrint("---D_Icosahedron: $D_Icosahedron");
+//       // debugPrint("D_Icosahedron.onReady: ${D_Icosahedron.onReady}");
+//       final JsObject ico = await promiseToFuture(
+//           _gw["Icosahedron"].callMethod("onReady", [mo, rm]));
+
+//       debugPrint("waiting 3 seconds");
+//       await Future.delayed(Duration(seconds: 3));
+
+//       debugPrint("ico.hasProperty('mo'): ${ico.hasProperty('mo')}");
+//       debugPrint("Icosahedron mo: ${ico["mo"]}");
+//       debugPrint("ico: $ico");
+
+//       // debugPrint(
+//       //     "ico runtime typeafter 3 secs: ${ico.runtimeType}, tostring: ${ico.toString}");
+//       // debugPrint("ico.pointFromCoords: ${ico.pointFromCoords}");
+
+//       // debugPrint("ico.pointFromCoords: ${ico.pointFromCoords}");
+//       debugPrint("---Icosahedron.onReady returning obj");
+//       return new Icosahedron._fromJsObj(ico);
+//     } else {
+//       throw UnimplementedError(
+//           "Icosahedron.onReady() not ready yet, currently only available on web");
+//     }
+//   }
+
+//   Point3 pointFromCoords(double lat, double lon) {
+//     if (kIsWeb) {
+//       final D_Point3 p3 = this._ico.callMethod("pointFromCoords", [lat, lon]);
+//       return new Point3._fromJsObj(p3);
+//     } else {
+//       throw UnimplementedError(
+//           "Icosahedron.pointFromCoords() not ready yet, currently only available on web");
+//     }
+//   }
+
+//   HashProperties hash(Point3 p, int res) {
+//     if (kIsWeb) {
+//       final D_HashProperties hp = this._ico.callMethod("hash", [p._p, res]);
+//       return new HashProperties._fromD_HashProperties(hp);
+//     } else {
+//       throw UnimplementedError(
+//           "Icosahedron.hash() not ready yet, currently only available on web");
+//     }
+//   }
+
+//   GPoint3 parseHash(HashProperties props) {
+//     if (kIsWeb) {
+//       final D_GPoint3 hp = this._ico.callMethod("parseHash", [props._hp]);
+//       return new GPoint3._fromD_GPoint3(hp);
+//     } else {
+//       throw UnimplementedError(
+//           "Icosahedron.hash() not ready yet, currently only available on web");
+//     }
+//   }
+// }
