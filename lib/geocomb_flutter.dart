@@ -37,7 +37,13 @@ class Icosahedron {
   static Future<Icosahedron> onReady(String mo, String rm) async {
     debugPrint("--Icosahedron.onReady called");
     if (kIsWeb) {
-      debugPrint("---calling D_Icosahedron.onReady");
+      debugPrint(
+          "---calling D_Icosahedron.onReady, importing geocomb_bundle.js");
+      // import geocomb_bundle.js for web
+      // importJsLibrary(
+      //   url: "./assets/geocomb_bundle.js",
+      //   flutterPluginName: "geocomb_flutter",
+      // );
       final D_Icosahedron ico =
           await promiseToFuture(D_Icosahedron.onReady(mo, rm));
       debugPrint("---called D_Icosahedron.onReady, now returning obj");
