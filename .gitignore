@@ -1,7 +1,16 @@
-.DS_Store
+# functionality not added yet
+android/
+ios/
+
+# dart/flutter
 .dart_tool/
 
 .packages
 .pub/
 
 build/
+
+analysis_options.yaml
+
+# misc
+.DS_Store
